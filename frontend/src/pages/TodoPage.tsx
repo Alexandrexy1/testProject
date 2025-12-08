@@ -13,13 +13,7 @@ interface Task {
 }
 
 export function TodoPage() {
-  const [tasks, setTasks] = useState<Task[]>([
-    { 
-      id: 1,
-      title: "resolver bugs", 
-      completed: false 
-    },
-  ]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [open, setOpen] = useState(false);
 
   const loadTasks = async () => {

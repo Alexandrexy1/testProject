@@ -26,6 +26,15 @@ Após essas correções, a aplicação passou a iniciar corretamente.
 
 ## 4. Relatório de Correção de Bugs
 
+### Bug 1 — Tarefa aparecendo automaticamente ao carregar a tela
+
+**Descrição do problema:**  
+Ao abrir o vite pela primeira vez, uma task já era exibida na lista mesmo sem o usuário ter criado nada. Isso causava confusão e não representava o comportamento esperado.
+
+**Causa raiz e solução do problema**  
+O estado inicial definido no `useState` de tasks tinha uma task já definida, eu removi essa task e deixei o estado vazio.
+
+
 ## 5. Relatório de Melhorias
 
 ## 6. Decisões e Considerações
