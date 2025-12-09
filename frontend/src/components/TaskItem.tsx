@@ -41,7 +41,7 @@ export function TaskItem({ title, completed, onToggle, onDelete }: Props) {
       </IconButton>
       <IconButton
         color="default"
-        sx={{ width: "50px", height: "50px" }}
+        sx={{ width: "50px", height: "50px", color: "rgba(232, 73, 73, 1)" }}
         onClick={onDelete}
       >
         <DeleteIcon />
