@@ -12,6 +12,7 @@ interface Task {
   completed: boolean;
 }
 
+
 export function TodoPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [open, setOpen] = useState(false);
@@ -27,8 +28,6 @@ export function TodoPage() {
   useEffect(() => {
     loadTasks();
   }, []);
-
-
 
 
   return (
@@ -81,7 +80,6 @@ export function TodoPage() {
           open={open}
           onClose={() => setOpen(false)}
           onCreate={(title) => {
-            createTask(title);
             createTask(title).then(loadTasks);
           }}
         />
