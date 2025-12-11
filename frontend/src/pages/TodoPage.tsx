@@ -76,7 +76,7 @@ export function TodoPage() {
           <AddIcon />
         </Fab>
 
-        <ModalTask
+            <ModalTask
           open={open}
           onClose={() => setOpen(false)}
           onCreate={(title) => {

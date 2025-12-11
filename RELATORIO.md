@@ -34,6 +34,27 @@ Ao abrir o vite pela primeira vez, uma task já era exibida na lista mesmo sem o
 **Causa raiz e solução do problema**  
 O estado inicial definido no `useState` de tasks tinha uma task já definida, eu removi essa task e deixei o estado vazio.
 
+---
+
+### Bug 2 — Ao salvar task, ela era adicionada duplicada
+
+**Descrição do problema:**  
+Ao criar uma nova task, ela era adicionada duas vezes na lista.
+
+**Causa raiz e solução do problema:**  
+No componente `ModalTask`, a função `onCreate` chamava `createTask` duas vezes.  
+Eu removi a chamada duplicada e deixei apenas a que criava a task quando as anteriores eram carregadas.
+
+---
+
+### Bug 3 — O botão “Remover” deve ser vermelho
+
+**Descrição do problema:**  
+O botão de remover não tinha destaque visual e não seguia a orientação do projeto, que pedia que a cor fosse vermelha.
+
+**Causa raiz e solução do problema:**  
+O botão estava usando a cor padrão e não transmitia que se tratava de uma ação de exclusão de task.  
+Eu apliquei a cor vermelha diretamente no estilo/componente do botão de remover, deixando a ação mais evidente.
 
 ## 5. Relatório de Melhorias
 

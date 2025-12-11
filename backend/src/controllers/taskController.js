@@ -13,7 +13,7 @@ const getTask = async (req, res) => {
 
 const createTask = async (req, res) => {
   const { title } = req.body;
-  console.log(title)
+  if (title.trim() === "") console.log(title)
   const task = await TaskService.createTask(title);
   res.status(201).json(task);
 }
