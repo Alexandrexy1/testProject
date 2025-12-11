@@ -84,6 +84,14 @@ Ao tentar excluir, por exemplo, o item número 1 de uma lista com 6 números, a 
 **Causa raiz e solução do problema:**
 Após trocar a lógica no backend para que a task fosse excluída a partir do seu id, a exclusão funcionou sem problemas, corrigindo a falha.
 
+### Bug 7 - Ao teclar enter, nada acontece
+
+**Descrição do problema:**
+Ao teclar enter, a task não era adicionada, causando frustração para o usuário.
+
+**Causa raiz e solução do problema:**
+Após adicionar um formulário `<form/>` ao ModalTask, o botão de submit passou a aceitar enter como confirmação.
+
 ## 5. Relatório de Melhorias
 
 ## 6. Decisões e Considerações

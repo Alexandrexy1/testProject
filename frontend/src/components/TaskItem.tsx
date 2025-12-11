@@ -29,7 +29,7 @@ export function TaskItem({ title, completed, onToggle, onDelete }: Props) {
           onChange={onToggle}
         />
         <Typography
-          sx={{ textDecoration: completed ?? "none", display: "flex", alignItems: "center" }}
+                  sx={{ textDecoration: completed ? "line-through" : "none", display: "flex", alignItems: "center" }}
         >
           {title}
         </Typography>
