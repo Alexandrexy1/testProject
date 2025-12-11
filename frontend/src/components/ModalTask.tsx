@@ -7,7 +7,7 @@ import {
   Stack,
   Alert
 } from "@mui/material";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 interface Props {
   open: boolean;
@@ -19,7 +19,9 @@ export function ModalTask({ open, onClose, onCreate }: Props) {
   const [title, setTitle] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    
     if (!title) {
       setShowAlert(true);
       return;
@@ -32,36 +34,37 @@ export function ModalTask({ open, onClose, onCreate }: Props) {
 
   return (
     <Dialog open={open} onClose={onClose}>
-
+      <form action="POST" onSubmit={handleSubmit}>
         <DialogTitle>Nova tarefa</DialogTitle>
-      <DialogContent>
-        <Stack spacing={2} mt={1}>
-          <TextField
-            label="Título"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            fullWidth
-            />
-          <Button variant="contained" onClick={handleSubmit}>
-            Criar
-          </Button>
-        </Stack>
-        {
-          showAlert && (
-              <Alert variant="outlined" severity="warning"
-                sx={{ marginTop: "16px", height: "44px", display: "flex", justifyContent: "center", alignItems: "center", '& .MuiAlert-message': {
-                  margin: 0,
-                  width: "100%",
-                  marginRight: "24px",
-                  textAlign: "center"
-                }, "& .MuiAlert-icon": {
-                  width: "24px"
-                }}}>
-                Título não pode estar vazio
-              </Alert>
-          )
-        }
-      </DialogContent>
+        <DialogContent>
+          <Stack spacing={2} mt={1}>
+            <TextField
+              label="Título"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              fullWidth
+              />
+            <Button variant="contained" type="submit">
+              Criar
+            </Button>
+          </Stack>
+          {
+            showAlert && (
+                <Alert variant="outlined" severity="warning"
+                  sx={{ marginTop: "16px", height: "44px", display: "flex", justifyContent: "center", alignItems: "center", '& .MuiAlert-message': {
+                    margin: 0,
+                    width: "100%",
+                    marginRight: "24px",
+                    textAlign: "center"
+                  }, "& .MuiAlert-icon": {
+                    width: "24px"
+                  }}}>
+                  Título não pode estar vazio
+                </Alert>
+            )
+          }
+        </DialogContent>
+      </form>
     </Dialog>
   );
 }
