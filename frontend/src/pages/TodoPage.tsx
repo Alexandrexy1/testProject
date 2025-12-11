@@ -40,6 +40,7 @@ export function TodoPage() {
           minWidth: "100%",
           height: "100vh",
           py: 4,
+          overflowY: "auto",
           backgroundColor: theme.palette.background.default,
         }}
       >

@@ -92,6 +92,22 @@ Ao teclar enter, a task não era adicionada, causando frustração para o usuár
 **Causa raiz e solução do problema:**
 Após adicionar um formulário `<form/>` ao ModalTask, o botão de submit passou a aceitar enter como confirmação.
 
+### Bug 8 - Ao mudar tarefa para finalizada, ele não risca a tarefa
+
+**Descrição do problema:**
+Ao selecionar a checkbox da task em específico, não risca o texto indicando task completada.
+
+**Causa raiz e solução do problema:**
+A ausência de um operador condicional ternário na Stack (Task) impedia que a frase fosse riscada, como nesse exemplo `textDecoration: completed ? "line-through" : "none"`.
+
+### Bug 9 - Barra de rolagem não funcional
+
+**Descrição do problema:**
+Ao ter mais tasks do que a tela consegue visualizar, a aplicação não apresenta barra de rolagem
+
+**Causa raiz e solução do problema:**
+No `Container` de `TodoPage` foi implementado um `overflowY: "auto"` ativando a barra de rolagem na página.
+
 ## 5. Relatório de Melhorias
 
 ## 6. Decisões e Considerações
