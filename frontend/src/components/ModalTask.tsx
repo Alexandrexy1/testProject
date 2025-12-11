@@ -5,6 +5,7 @@ import {
   TextField,
   Button,
   Stack,
+  Alert
 } from "@mui/material";
 import { useState } from "react";
 
@@ -16,10 +17,16 @@ interface Props {
 
 export function ModalTask({ open, onClose, onCreate }: Props) {
   const [title, setTitle] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = () => {
+    if (!title) {
+      setShowAlert(true);
+      return;
+    }
     onCreate(title);
     setTitle("");
+    setShowAlert(false);
     onClose();
   };
 
@@ -39,6 +46,21 @@ export function ModalTask({ open, onClose, onCreate }: Props) {
             Criar
           </Button>
         </Stack>
+        {
+          showAlert && (
+              <Alert variant="outlined" severity="warning"
+                sx={{ marginTop: "16px", height: "44px", display: "flex", justifyContent: "center", alignItems: "center", '& .MuiAlert-message': {
+                  margin: 0,
+                  width: "100%",
+                  marginRight: "24px",
+                  textAlign: "center"
+                }, "& .MuiAlert-icon": {
+                  width: "24px"
+                }}}>
+                Título não pode estar vazio
+              </Alert>
+          )
+        }
       </DialogContent>
     </Dialog>
   );

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Fab, Grid, Typography } from "@mui/material";
+import { Container, Fab, Grid, IconButton, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { TaskItem } from "../components/TaskItem";
 import { getTasks, createTask, toggleTask, deleteTask } from "../services/requests";
@@ -16,6 +16,7 @@ interface Task {
 export function TodoPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [open, setOpen] = useState(false);
+
 
   const loadTasks = async () => {
     const res = await getTasks();
@@ -42,8 +43,8 @@ export function TodoPage() {
         }}
       >
         <Typography
-          variant="h4"
-          sx={{ color: "#fff" }}
+          variant="h1"
+          sx={{ color: "#fff", fontSize: "36px" }}
           textAlign={"center"}
           fontWeight={700}
           mb={3}
