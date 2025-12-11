@@ -76,6 +76,13 @@ Ao criar uma task sem descrição, nada acontecia. Permitindo que a task fosse a
 **Causa raiz e solução do problema:**
 Foi utilizado um `<Alert/>` do Material UI para criar um aviso (Warning) para o usuário de que o campo título não poderia estar vazio. Barrando que a task fosse submetida sem o campo requerido.
 
+### Bug 6 - Ao excluir uma tarefa, ela exclui a última criada
+
+**Descrição do problema:**
+Ao tentar excluir, por exemplo, o item número 1 de uma lista com 6 números, a aplicação excluia o último (6* número) da lista.
+
+**Causa raiz e solução do problema:**
+Após trocar a lógica no backend para que a task fosse excluída a partir do seu id, a exclusão funcionou sem problemas, corrigindo a falha.
 
 ## 5. Relatório de Melhorias
 
