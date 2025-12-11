@@ -26,7 +26,7 @@ const updateTask = async (req, res) => {
 }
 
 const deleteTask = async (req, res) => {
-  const {id}= req.params
+  const id = req.params.id;
   const deleted = await TaskService.deleteTask(id);
   if (!deleted) return res.status(404).json({ error: 'Tarefa não encontrada' });
   res.json({ success: true });

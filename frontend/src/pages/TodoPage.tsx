@@ -26,6 +26,7 @@ export function TodoPage() {
   });
   };
 
+
   useEffect(() => {
     loadTasks();
   }, []);
@@ -60,7 +61,7 @@ export function TodoPage() {
                 onToggle={() =>
                   setTasks(
                     (prev) =>
-                      prev.map((t) => ({ ...t, completed: !item.completed })),
+                      prev.map((t) => t.id === item.id ? { ...t, completed: !item.completed } : t),
                   )
                 }
                 onDelete={() => deleteTask(item.id).then(loadTasks)}

@@ -13,6 +13,7 @@ interface Props {
 
 export function TaskItem({ title, completed, onToggle, onDelete }: Props) {
   const [toggle, setToggle] = useState(false)
+  
   return (
     <Card
       sx={{
