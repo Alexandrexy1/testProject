@@ -56,6 +56,27 @@ O botão de remover não tinha destaque visual e não seguia a orientação do p
 O botão estava usando a cor padrão e não transmitia que se tratava de uma ação de exclusão de task.  
 Eu apliquei a cor vermelha diretamente no estilo/componente do botão de remover, deixando a ação mais evidente.
 
+---
+
+### Bug 4 - Espaços no campo “Título da Tarefa” e salvar também está adicionando um item em branco
+
+**Descrição do problema:**
+Ao criar uma task com o campo em branco, apenas com espaços, também está adicionando a task à coleção. 
+
+**Causa raiz e solução do problema:**
+A falta de uma lógica que retirasse os espaços permitia que a task fosse adicionada somente com espaços. Foi usado um `title.trim()` para retirar espaços (início e fim) junto com um sinal de igualdade `===` para verificar se o title sem espaços era apenas uma string vazia `""`. 
+
+--- 
+
+### Bug 5 - Ao criar uma tarefa sem descrição, nada acontece. O ideal é mostrar pro usuário que o campo não pode ser nulo
+
+**Descrição do problema:**
+Ao criar uma task sem descrição, nada acontecia. Permitindo que a task fosse adicionada de sem o campo título.
+
+**Causa raiz e solução do problema:**
+Foi utilizado um `<Alert/>` do Material UI para criar um aviso (Warning) para o usuário de que o campo título não poderia estar vazio. Barrando que a task fosse submetida sem o campo requerido.
+
+
 ## 5. Relatório de Melhorias
 
 ## 6. Decisões e Considerações
