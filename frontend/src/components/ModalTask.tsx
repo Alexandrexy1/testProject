@@ -7,7 +7,6 @@ import {
   Stack,
 } from "@mui/material";
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
 
 interface Props {
   open: boolean;
@@ -17,7 +16,6 @@ interface Props {
 
 export function ModalTask({ open, onClose, onCreate }: Props) {
   const [title, setTitle] = useState("");
-  const notify = () => toast("Wow so easy!");
 
   const handleSubmit = () => {
     onCreate(title);

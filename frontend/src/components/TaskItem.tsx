@@ -18,7 +18,7 @@ export function TaskItem({ title, completed, onToggle, onDelete }: Props) {
       sx={{
         p: 2,
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "space-between"
       }}
     >
       <Stack direction="row" spacing={2}>
@@ -28,7 +28,7 @@ export function TaskItem({ title, completed, onToggle, onDelete }: Props) {
           onChange={onToggle}
         />
         <Typography
-          sx={{ textDecoration: completed ?? "none" }}
+          sx={{ textDecoration: completed ?? "none", display: "flex", alignItems: "center" }}
         >
           {title}
         </Typography>
