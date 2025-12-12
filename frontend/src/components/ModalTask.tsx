@@ -7,35 +7,53 @@ import {
   Stack,
   Alert
 } from "@mui/material";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 interface Props {
   open: boolean;
   onClose: () => void;
   onCreate: (title: string) => void;
+  onUpdate: (id: number, title: string) => void;
+  id?: number;
+  title?: string;
+  mode: "create" | "update";
 }
 
-export function ModalTask({ open, onClose, onCreate }: Props) {
+export function ModalTask({ open, onClose, onCreate, onUpdate, id, mode = "create", title: initialTitle = "" }: Props) {
   const [title, setTitle] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
+  useEffect(() => {
+    if (open) {
+      if (mode === "update") {
+        setTitle(initialTitle);
+      } else setTitle("");
+    }
+  }, [open, mode, initialTitle])
+
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    
+
     if (!title) {
       setShowAlert(true);
       return;
     }
-    onCreate(title);
+    if (mode === "create") {
+      onCreate(title);
+
+    } else if (mode === "update") {
+      onUpdate(id!, title);
+    }
+
     setTitle("");
     setShowAlert(false);
     onClose();
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} key={id ?? "create"}>
       <form action="POST" onSubmit={handleSubmit}>
-        <DialogTitle>Nova tarefa</DialogTitle>
+        <DialogTitle>{ mode === "create" ? "Criar tarefa" : "Editar tarefa" }</DialogTitle>
         <DialogContent>
           <Stack spacing={2} mt={1}>
             <TextField
@@ -45,7 +63,7 @@ export function ModalTask({ open, onClose, onCreate }: Props) {
               fullWidth
               />
             <Button variant="contained" type="submit">
-              Criar
+              { mode === "create" ? "Criar" : "Salvar alterações"}
             </Button>
           </Stack>
           {

@@ -2,6 +2,8 @@ import { Card, Checkbox, IconButton, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
 import { Edit } from "@mui/icons-material";
+import { ModalTask } from "./ModalTask";
+import { toggleTask } from "../services/requests";
 
 interface Props {
   id: number;
@@ -9,11 +11,13 @@ interface Props {
   completed: boolean;
   onToggle: () => void;
   onDelete: () => void;
+  onUpdated: () => void;
 }
 
-export function TaskItem({ title, completed, onToggle, onDelete }: Props) {
+export function TaskItem({ id, title, completed, onToggle, onDelete, onUpdated }: Props) {
   const [toggle, setToggle] = useState(false)
-  
+  const [open, setOpen] = useState(false);
+
   return (
     <Card
       sx={{
@@ -37,6 +41,7 @@ export function TaskItem({ title, completed, onToggle, onDelete }: Props) {
       <IconButton
         color="info"
         sx={{ width: "50px", height: "50px"}}
+        onClick={() => setOpen(true)}
       >
         <Edit />
       </IconButton>
@@ -47,6 +52,16 @@ export function TaskItem({ title, completed, onToggle, onDelete }: Props) {
       >
         <DeleteIcon />
       </IconButton>
+      <ModalTask
+        open={open}
+        onClose={() => setOpen(false)}
+        mode="update" 
+        onCreate={() => {}}
+        id={id}
+        title={title}
+        onUpdate={(id, title) => {
+          toggleTask(id, title, toggle).then(onUpdated)} }
+        />
     </Card>
   );
 }

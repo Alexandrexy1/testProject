@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Container, Fab, Grid, IconButton, Typography } from "@mui/material";
+import { Container, Fab, Grid, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { TaskItem } from "../components/TaskItem";
-import { getTasks, createTask, toggleTask, deleteTask } from "../services/requests";
+import { getTasks, createTask, deleteTask, toggleTask } from "../services/requests";
 import { ModalTask } from "../components/ModalTask";
 import { theme } from "../styles/theme";
 
@@ -59,13 +59,15 @@ export function TodoPage() {
             <Grid item xs={12} md={6} lg={4} key={item.id}>
               <TaskItem
                 {...item}
-                onToggle={() =>
+                onToggle={() =>{
                   setTasks(
                     (prev) =>
                       prev.map((t) => t.id === item.id ? { ...t, completed: !item.completed } : t),
                   )
-                }
+                  toggleTask(item.id, item.title, !item.completed).then(loadTasks);
+                }}
                 onDelete={() => deleteTask(item.id).then(loadTasks)}
+                onUpdated={loadTasks}
               />
             </Grid>
           ))}
@@ -79,13 +81,15 @@ export function TodoPage() {
           <AddIcon />
         </Fab>
 
-            <ModalTask
+        <ModalTask
           open={open}
           onClose={() => setOpen(false)}
           onCreate={(title) => {
             createTask(title).then(loadTasks);
-          }}
-        />
+          } }
+          mode="create" 
+          onUpdate={() => {}} 
+          />
       </Container>
     </>
   );

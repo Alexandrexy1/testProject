@@ -108,6 +108,14 @@ Ao ter mais tasks do que a tela consegue visualizar, a aplicação não apresent
 **Causa raiz e solução do problema:**
 No `Container` de `TodoPage` foi implementado um `overflowY: "auto"` ativando a barra de rolagem na página.
 
+### Bug 10 - O botão de Editar não está funcionando corretamente
+
+**Descrição do problema:**
+A ação de editar a task estava inutilizada, não abria um campo para que o usuário pudesse editar.
+
+**Causa raiz e solução do problema:**
+Foi reutilizado o `TaskModal`, com pequenas alterações, um atributo `mode` foi adicionado à `TaskModel` para trocar entre `"create" e "update"`, mudando, assim, algumas partes da interação com o usuário e com a lógica por trás da aplicação.
+
 ## 5. Relatório de Melhorias
 
 ## 6. Decisões e Considerações
