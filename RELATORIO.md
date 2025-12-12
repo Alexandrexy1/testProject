@@ -2,7 +2,71 @@
 
 ## 1. Visão Geral da Solução
 
+A aplicação consiste em um sistema completo de gerenciamento de tarefas, dividido entre um backend em **Node.js com Express e Sequelize** (utilizando SQL Server) e um frontend em **React + Vite** com **Material UI** para a interface.
+
+Desde o início do projeto, foi necessário revisar componentes essenciais da arquitetura, corrigindo fluxos de criação, edição, exclusão e atualização das tasks — tanto no backend quanto no frontend.
+
+Durante o desenvolvimento, foram implementadas boas práticas de organização, validação e experiência do usuário. No backend, ajustes importantes garantiram o correto funcionamento das rotas, carregamento de ambiente e operações com o banco. No frontend, problemas de estado, duplicações, validações, estilização e usabilidade foram corrigidos e aprimorados.
+
+Ao final, a aplicação está **totalmente funcional**, oferecendo uma experiência fluida ao usuário, permitindo criar, listar, atualizar, marcar como concluída e excluir tarefas com segurança e feedback visual adequado.
+
+---
+
 ## 2. Como Executar a Aplicação
+
+A aplicação é dividida em duas partes: **backend** e **frontend**.  
+Abaixo estão as instruções para rodar cada uma delas.
+
+---
+
+## **📌 Backend (Node.js + Express + Sequelize)**
+
+### **Pré-requisitos**
+- Node.js instalado  
+- Arquivo `.env` configurado com as credenciais do SQL Server  
+- Dependências instaladas com:
+
+```bash
+npm install
+```
+
+### **▶️ Como iniciar o backend**
+No diretório do backend, execute:
+
+```bash
+npm run start
+```
+
+O servidor será iniciado e utilizará a porta definida no arquivo `.env`.
+
+---
+
+## **📌 Frontend (React + Vite + Material UI)**
+
+### **Pré-requisitos**
+- Node.js instalado  
+- Dependências instaladas com:
+
+```bash
+npm install
+```
+
+### **▶️ Como iniciar o frontend**
+No diretório do frontend, execute:
+
+```bash
+npm run dev
+```
+
+O Vite iniciará o servidor de desenvolvimento, geralmente acessível em:
+
+```
+http://localhost:5173
+```
+
+---
+
+Depois de iniciar **backend** e **frontend**, a aplicação estará funcionando completamente.
 
 ## 3. Correção dos Erros Iniciais
 Ao executar `npm run dev`, o backend não estava iniciando. Abaixo, eu listei os problemas que identifiquei e suas correções:
@@ -149,4 +213,37 @@ A falta de uma lógica que retirasse os espaços permitia que a task fosse adici
 
 ## 5. Relatório de Melhorias
 
+Além das correções de bugs, diversas melhorias foram aplicadas para elevar a qualidade, consistência e usabilidade da aplicação.
+
+## **Melhorias de UX e Interface**
+- Implementação do componente **ConfirmDelete**, adicionando uma confirmação antes da exclusão e evitando remoções acidentais.  
+- Alinhamento visual correto dos elementos da task, garantindo consistência e legibilidade.  
+- Destaque visual ao botão de remover (cor vermelha), refletindo claramente sua função.  
+- Adição de barra de rolagem automática no container de tarefas, melhorando a navegação em listas grandes.
+
+## **Melhorias de Organização e Estrutura**
+- Padronização das funções do `taskController`, garantindo exportações claras e organizadas.  
+- Implementação do atributo `mode` no `ModalTask`, permitindo reutilização do componente tanto para criação quanto para edição.  
+- Revisão das chamadas de API para evitar comportamentos duplicados e inconsistentes.
+
+## **Melhorias de Validação e Confiabilidade**
+- Validação mais robusta do campo de título utilizando `trim`, impedindo criação de tarefas vazias ou apenas com espaços.  
+- Adição de suporte ao envio do formulário via tecla **Enter**, tornando o fluxo mais intuitivo.  
+- Correção do comportamento da marcação de tarefas concluídas, garantindo o riscado do texto com `text-decoration`.
+
+---
+
 ## 6. Decisões e Considerações
+
+Desde que iniciei no projeto, foi necessário revisar e ajustar partes essenciais da implementação — desde o backend até a interface do usuário. A lógica de atualização de tarefas no backend precisou ser revista para garantir integridade e consistência dos dados. No frontend, melhorias significativas foram feitas para otimizar a experiência do usuário, incluindo a criação do componente **ConfirmDelete**, que tornou a aplicação mais segura e profissional no processo de exclusão.
+
+Ao longo desse processo, conheci mais de **Express**, especialmente no uso do **Sequelize com SQL Server**, que tem particularidades de configuração e modelagem. Também relembrei conceitos de **React**, como componentização, controle de estado e boas práticas de interface.
+
+Todas as decisões tomadas priorizaram:
+
+- **Clareza e organização do código**  
+- **Experiência do usuário**  
+- **Segurança na manipulação de dados**  
+- **Escalabilidade e manutenibilidade futura**
+
+O resultado final é uma aplicação estável, refinada e completamente funcional, refletindo evolução técnica contínua e atenção aos detalhes ao longo do desenvolvimento.
