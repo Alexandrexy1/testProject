@@ -47,7 +47,78 @@ Eu removi a chamada duplicada e deixei apenas a que criava a task quando as ante
 
 ---
 
-### Bug 3 — O botão “Remover” deve ser vermelho
+### Bug 3 - Ao criar uma tarefa sem descrição, nada acontece. O ideal é mostrar pro usuário que o campo não pode ser nulo
+
+**Descrição do problema:**
+Ao criar uma task sem descrição, nada acontecia. Permitindo que a task fosse adicionada de sem o campo título.
+
+**Causa raiz e solução do problema:**
+Foi utilizado um `<Alert/>` do Material UI para criar um aviso (Warning) para o usuário de que o campo título não poderia estar vazio. Barrando que a task fosse submetida sem o campo requerido.
+
+
+---
+
+### Bug 4 - Ao excluir uma tarefa, ela exclui a última criada
+
+**Descrição do problema:**
+Ao tentar excluir, por exemplo, o item número 1 de uma lista com 6 números, a aplicação excluia o último (6* número) da lista.
+
+**Causa raiz e solução do problema:**
+Após trocar a lógica no backend para que a task fosse excluída a partir do seu id, a exclusão funcionou sem problemas, corrigindo a falha.
+
+---
+
+### Bug 5 - Ao teclar enter, nada acontece
+
+**Descrição do problema:**
+Ao teclar enter, a task não era adicionada, causando frustração para o usuário.
+
+**Causa raiz e solução do problema:**
+Após adicionar um formulário `<form/>` ao ModalTask, o botão de submit passou a aceitar enter como confirmação.
+
+--- 
+
+### Bug 6 - Ao mudar tarefa para finalizada, ele não risca a tarefa
+
+**Descrição do problema:**
+Ao selecionar a checkbox da task em específico, não risca o texto indicando task completada.
+
+**Causa raiz e solução do problema:**
+A ausência de um operador condicional ternário na Stack (Task) impedia que a frase fosse riscada, como nesse exemplo `textDecoration: completed ? "line-through" : "none"`.
+
+---
+
+### Bug 7 - Ação de excluir 
+
+**Descrição do problema:**
+A ação de excluir uma tarefa não solicitava uma confirmação, podendo acontecer por engano e causar frustração no usuário.
+
+**Causa raiz e solução do problema:**
+O `TaskItem` chamava o método `onDelete` de uma vez quando o ícone da lixeira fosse clicado. A solução fui utilizar o que o mui já oferece e criar um componente `ConfirmDelete`, sendo chamado antes de `onDelete`.
+
+--- 
+
+### Bug 8 - O botão de Editar não está funcionando corretamente
+
+**Descrição do problema:**
+A ação de editar a task estava inutilizada, não abria um campo para que o usuário pudesse editar.
+
+**Causa raiz e solução do problema:**
+Foi reutilizado o `TaskModal`, com pequenas alterações, um atributo `mode` foi adicionado à `TaskModel` para trocar entre `"create" e "update"`, mudando, assim, algumas partes da interação com o usuário e com a lógica por trás da aplicação.
+
+---
+
+### Bug 9 - A task está desalinhada e deve ser posicionado alinhado aos outros elementos
+
+**Descrição do problema:**
+O título da task estava desalinhada em relação aos outros componentes da própria task.
+
+**Causa raiz e solução do problema:**
+A ausência de um `display: "flex", alignItems: "center` fazia com que o título ficasse desalinhado.
+
+--- 
+
+### Bug 10 — O botão “Remover” deve ser vermelho
 
 **Descrição do problema:**  
 O botão de remover não tinha destaque visual e não seguia a orientação do projeto, que pedia que a cor fosse vermelha.
@@ -56,51 +127,9 @@ O botão de remover não tinha destaque visual e não seguia a orientação do p
 O botão estava usando a cor padrão e não transmitia que se tratava de uma ação de exclusão de task.  
 Eu apliquei a cor vermelha diretamente no estilo/componente do botão de remover, deixando a ação mais evidente.
 
----
-
-### Bug 4 - Espaços no campo “Título da Tarefa” e salvar também está adicionando um item em branco
-
-**Descrição do problema:**
-Ao criar uma task com o campo em branco, apenas com espaços, também está adicionando a task à coleção. 
-
-**Causa raiz e solução do problema:**
-A falta de uma lógica que retirasse os espaços permitia que a task fosse adicionada somente com espaços. Foi usado um `title.trim()` para retirar espaços (início e fim) junto com um sinal de igualdade `===` para verificar se o title sem espaços era apenas uma string vazia `""`. 
-
 --- 
 
-### Bug 5 - Ao criar uma tarefa sem descrição, nada acontece. O ideal é mostrar pro usuário que o campo não pode ser nulo
-
-**Descrição do problema:**
-Ao criar uma task sem descrição, nada acontecia. Permitindo que a task fosse adicionada de sem o campo título.
-
-**Causa raiz e solução do problema:**
-Foi utilizado um `<Alert/>` do Material UI para criar um aviso (Warning) para o usuário de que o campo título não poderia estar vazio. Barrando que a task fosse submetida sem o campo requerido.
-
-### Bug 6 - Ao excluir uma tarefa, ela exclui a última criada
-
-**Descrição do problema:**
-Ao tentar excluir, por exemplo, o item número 1 de uma lista com 6 números, a aplicação excluia o último (6* número) da lista.
-
-**Causa raiz e solução do problema:**
-Após trocar a lógica no backend para que a task fosse excluída a partir do seu id, a exclusão funcionou sem problemas, corrigindo a falha.
-
-### Bug 7 - Ao teclar enter, nada acontece
-
-**Descrição do problema:**
-Ao teclar enter, a task não era adicionada, causando frustração para o usuário.
-
-**Causa raiz e solução do problema:**
-Após adicionar um formulário `<form/>` ao ModalTask, o botão de submit passou a aceitar enter como confirmação.
-
-### Bug 8 - Ao mudar tarefa para finalizada, ele não risca a tarefa
-
-**Descrição do problema:**
-Ao selecionar a checkbox da task em específico, não risca o texto indicando task completada.
-
-**Causa raiz e solução do problema:**
-A ausência de um operador condicional ternário na Stack (Task) impedia que a frase fosse riscada, como nesse exemplo `textDecoration: completed ? "line-through" : "none"`.
-
-### Bug 9 - Barra de rolagem não funcional
+### Bug 11 - Barra de rolagem não funcional
 
 **Descrição do problema:**
 Ao ter mais tasks do que a tela consegue visualizar, a aplicação não apresenta barra de rolagem
@@ -108,13 +137,15 @@ Ao ter mais tasks do que a tela consegue visualizar, a aplicação não apresent
 **Causa raiz e solução do problema:**
 No `Container` de `TodoPage` foi implementado um `overflowY: "auto"` ativando a barra de rolagem na página.
 
-### Bug 10 - O botão de Editar não está funcionando corretamente
+---
+
+### Bug 12 - Espaços no campo “Título da Tarefa” e salvar também está adicionando um item em branco
 
 **Descrição do problema:**
-A ação de editar a task estava inutilizada, não abria um campo para que o usuário pudesse editar.
+Ao criar uma task com o campo em branco, apenas com espaços, também está adicionando a task à coleção. 
 
 **Causa raiz e solução do problema:**
-Foi reutilizado o `TaskModal`, com pequenas alterações, um atributo `mode` foi adicionado à `TaskModel` para trocar entre `"create" e "update"`, mudando, assim, algumas partes da interação com o usuário e com a lógica por trás da aplicação.
+A falta de uma lógica que retirasse os espaços permitia que a task fosse adicionada somente com espaços. Foi usado um `title.trim()` para retirar espaços (início e fim) junto com um sinal de igualdade `===` para verificar se o title sem espaços era apenas uma string vazia `""`. 
 
 ## 5. Relatório de Melhorias
 

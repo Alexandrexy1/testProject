@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Edit } from "@mui/icons-material";
 import { ModalTask } from "./ModalTask";
 import { toggleTask } from "../services/requests";
+import ConfirmDelete from "./ConfirmDelete";
 
 interface Props {
   id: number;
@@ -17,6 +18,7 @@ interface Props {
 export function TaskItem({ id, title, completed, onToggle, onDelete, onUpdated }: Props) {
   const [toggle, setToggle] = useState(false)
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
   return (
     <Card
@@ -48,7 +50,7 @@ export function TaskItem({ id, title, completed, onToggle, onDelete, onUpdated }
       <IconButton
         color="default"
         sx={{ width: "50px", height: "50px", color: "rgba(232, 73, 73, 1)" }}
-        onClick={onDelete}
+        onClick={() => setOpenDelete(true)}
       >
         <DeleteIcon />
       </IconButton>
@@ -62,6 +64,14 @@ export function TaskItem({ id, title, completed, onToggle, onDelete, onUpdated }
         onUpdate={(id, title) => {
           toggleTask(id, title, toggle).then(onUpdated)} }
         />
+        <ConfirmDelete
+          open={openDelete}
+          onClose={() => setOpenDelete(false)}
+          onConfirm={() => {
+            onDelete();
+            setOpenDelete(false);
+          }}
+          />
     </Card>
   );
 }
