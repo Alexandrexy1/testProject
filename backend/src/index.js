@@ -13,7 +13,7 @@ app.use('/tasks', tasksRouter);
 
 sequelize.sync()
     .then(() => {
-        console.log("ABRRRRRRRRRRRRRIIIIIIIIIIIIIIIIIIIIUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
+        console.log();
     })
     .catch(err => {
         console.log("Olha o erro: ", err);
